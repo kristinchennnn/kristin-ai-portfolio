@@ -4,22 +4,36 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "next build --webpack",
     "start": "next start",
-    "lint": "tsc --noEmit"
+    "lint": "tsc --noEmit && tsc --noEmit -p worker/tsconfig.json",
+    "test": "vitest run",
+    "worker:dev": "wrangler dev --config worker/wrangler.jsonc",
+    "worker:types": "wrangler types --config worker/wrangler.jsonc worker/env.d.ts",
+    "worker:deploy": "wrangler deploy --config worker/wrangler.jsonc",
+    "worker:migrate": "wrangler d1 migrations apply workflowlens --remote --config worker/wrangler.jsonc"
   },
   "dependencies": {
+    "@takumi-rs/helpers": "^2.12.0",
+    "@vercel/analytics": "^2.0.1",
+    "lucide-react": "^1.34.0",
+    "mammoth": "^1.12.1",
     "next": "16.3.0",
+    "pdfjs-dist": "^6.2.108",
     "react": "19.2.0",
-    "react-dom": "19.2.0"
+    "react-dom": "19.2.0",
+    "takumi-pdf": "^0.11.3",
+    "zod": "^4.4.3"
   },
   "devDependencies": {
     "@types/node": "20.14.12",
     "@types/react": "19.1.9",
     "@types/react-dom": "19.1.7",
     "autoprefixer": "10.4.19",
-    "postcss": "8.4.40",
+    "postcss": "8.5.26",
     "tailwindcss": "3.4.7",
-    "typescript": "5.5.4"
+    "typescript": "5.5.4",
+    "vitest": "^4.1.11",
+    "wrangler": "^4.125.0"
   }
 }

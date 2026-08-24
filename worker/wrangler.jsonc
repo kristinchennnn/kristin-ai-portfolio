@@ -1,0 +1,32 @@
+{
+  "$schema": "../node_modules/wrangler/config-schema.json",
+  "name": "workflowlens-api",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-08-24",
+  "compatibility_flags": ["nodejs_compat"],
+  "workers_dev": false,
+  "ai": { "binding": "AI", "remote": true },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "workflowlens",
+      "database_id": "be551084-c276-449f-aabd-ddadf477d8f5",
+      "migrations_dir": "migrations"
+    }
+  ],
+  "vars": {
+    "ENVIRONMENT": "production",
+    "ALLOWED_ORIGINS": "https://kristinzhiyingchen.com,https://www.kristinzhiyingchen.com,http://localhost:3000",
+    "TURNSTILE_HOSTNAMES": "kristinzhiyingchen.com,www.kristinzhiyingchen.com",
+    "GLOBAL_DAILY_LIMIT": "5",
+    "REPORT_TTL_DAYS": "30"
+  },
+  "routes": [
+    { "pattern": "workflowlens-api.kristinzhiyingchen.com", "custom_domain": true }
+  ],
+  "observability": {
+    "enabled": true,
+    "logs": { "enabled": true, "head_sampling_rate": 1 },
+    "traces": { "enabled": true, "head_sampling_rate": 0.1 }
+  }
+}

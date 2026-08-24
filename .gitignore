@@ -5,6 +5,9 @@ out/
 npm-debug.log*
 .vercel/
 .env*
+.dev.vars
+worker/.dev.vars
+worker/.wrangler/
 *.tsbuildinfo
 
 # Local source material and screenshots

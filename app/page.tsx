@@ -4,10 +4,11 @@ import { Card } from "@/components/ui/card";
 const projects = [
   {
     number: "01",
-    title: "AI research copilot",
-    description: "A source-aware research workflow that turns a broad question into structured notes, evidence, and a decision-ready brief.",
-    tags: ["Research", "Synthesis", "Evaluation"],
-    status: "Next build",
+    title: "WorkflowLens",
+    description: "A working AI opportunity assessment that maps a business workflow and shows what to automate, augment, redesign, or keep human.",
+    tags: ["Workers AI", "Workflow design", "Human-in-loop"],
+    status: "Live product",
+    href: "/workflowlens",
   },
   {
     number: "02",
@@ -15,6 +16,7 @@ const projects = [
     description: "An AI-assisted pipeline that takes messy business data from first inspection to validated insights and executive-ready reporting.",
     tags: ["Python", "SQL", "Codex"],
     status: "Next build",
+    href: "#contact",
   },
   {
     number: "03",
@@ -22,6 +24,7 @@ const projects = [
     description: "A practical workflow prototype that automates repetitive knowledge work while keeping review, quality checks, and accountability in the loop.",
     tags: ["Workflow design", "AI adoption", "QA"],
     status: "Next build",
+    href: "#contact",
   },
 ];
 
@@ -33,8 +36,10 @@ const experience = [
 ];
 
 export default function Home() {
+  const personLd = { "@context": "https://schema.org", "@type": "Person", name: "Kristin Chen", alternateName: "Zhiying Chen", url: "https://kristinzhiyingchen.com", image: "https://kristinzhiyingchen.com/image.png", jobTitle: "AI Builder and Workflow Consultant", sameAs: ["https://www.linkedin.com/in/zhiying-kristin-chen/"], address: { "@type": "PostalAddress", addressLocality: "Toronto", addressCountry: "CA" } };
   return (
     <main>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(personLd) }} />
       <nav className="nav shell">
         <a className="wordmark" href="#top">KC<span>.</span></a>
         <div className="nav-links"><a href="#work">Work</a><a href="#approach">Approach</a><a href="#about">About</a></div>
@@ -63,7 +68,7 @@ export default function Home() {
 
       <section className="approach shell" id="approach"><div className="section-label">/ 02 — How I work</div><div className="approach-grid"><div className="approach-card"><span>01</span><h3>Find the friction</h3><p>Understand the task, the people, and the decision before reaching for a tool.</p></div><div className="approach-card active"><span>02</span><h3>Prototype the useful</h3><p>Build a focused workflow quickly, with clear inputs, outputs, and a human review point.</p></div><div className="approach-card"><span>03</span><h3>Make it repeatable</h3><p>Document what works, test the edges, and help the team adopt it with confidence.</p></div></div></section>
 
-      <section className="work shell" id="work"><div className="work-heading"><div className="section-label">/ 03 — Work in progress</div><h2>Three ways I&apos;m<br /><em>building</em> with AI.</h2><p>These are the first experiments in the portfolio. Each one will become a full case study as I build it.</p></div><div className="project-grid">{projects.map((project) => <Card key={project.number} className="project-card"><div className="project-top"><span className="project-number">{project.number}</span><span className="project-status">{project.status}</span></div><div className="project-shape" data-project={project.number}><span>✳</span></div><h3>{project.title}</h3><p>{project.description}</p><div className="tag-row">{project.tags.map((tag) => <span key={tag}>{tag}</span>)}</div><a href="#contact" className="project-link">View build plan <span>↗</span></a></Card>)}</div></section>
+      <section className="work shell" id="work"><div className="work-heading"><div className="section-label">/ 03 — Selected work</div><h2>Building AI around<br /><em>better work.</em></h2><p>WorkflowLens is live now. Two related experiments will follow as full case studies.</p></div><div className="project-grid">{projects.map((project) => <Card key={project.number} className="project-card"><div className="project-top"><span className="project-number">{project.number}</span><span className="project-status">{project.status}</span></div><div className="project-shape" data-project={project.number}><span>✳</span></div><h3>{project.title}</h3><p>{project.description}</p><div className="tag-row">{project.tags.map((tag) => <span key={tag}>{tag}</span>)}</div><a href={project.href} className="project-link">{project.number === "01" ? "Explore live product" : "View build plan"} <span>↗</span></a></Card>)}</div></section>
 
       <section className="experience shell"><div className="section-label">/ 04 — The foundation</div><div className="experience-layout"><h2>Data is where<br /><span>I learned to think.</span></h2><div className="timeline">{experience.map((item) => <div className="timeline-row" key={item.company}><div className="timeline-year">{item.year}</div><div><h3>{item.role}</h3><p className="company">{item.company}</p><p>{item.detail}</p></div></div>)}</div></div></section>
 
