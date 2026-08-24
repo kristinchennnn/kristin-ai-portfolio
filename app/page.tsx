@@ -1,32 +1,14 @@
 import Image from "next/image";
 import { Card } from "@/components/ui/card";
 
-const projects = [
-  {
-    number: "01",
-    title: "WorkflowLens",
-    description: "A working AI opportunity assessment that maps a business workflow and shows what to automate, augment, redesign, or keep human.",
-    tags: ["Workers AI", "Workflow design", "Human-in-loop"],
-    status: "Live product",
-    href: "/workflowlens",
-  },
-  {
-    number: "02",
-    title: "Data-to-decision workflow",
-    description: "An AI-assisted pipeline that takes messy business data from first inspection to validated insights and executive-ready reporting.",
-    tags: ["Python", "SQL", "Codex"],
-    status: "Next build",
-    href: "#contact",
-  },
-  {
-    number: "03",
-    title: "Human-in-the-loop automation",
-    description: "A practical workflow prototype that automates repetitive knowledge work while keeping review, quality checks, and accountability in the loop.",
-    tags: ["Workflow design", "AI adoption", "QA"],
-    status: "Next build",
-    href: "#contact",
-  },
-];
+const project = {
+  number: "01",
+  title: "WorkflowLens",
+  description: "A live AI opportunity assessment that maps how work happens today, identifies friction, and recommends what to automate, augment, redesign, or keep human.",
+  tags: ["Workers AI", "Workflow design", "Human-in-loop", "Next.js"],
+  status: "Live product",
+  href: "/workflowlens",
+};
 
 const experience = [
   { year: "2025—now", role: "Research Assistant", company: "Ivey Business School", detail: "Data preprocessing · predictive analytics · large-scale ML support" },
@@ -68,7 +50,18 @@ export default function Home() {
 
       <section className="approach shell" id="approach"><div className="section-label">/ 02 — How I work</div><div className="approach-grid"><div className="approach-card"><span>01</span><h3>Find the friction</h3><p>Understand the task, the people, and the decision before reaching for a tool.</p></div><div className="approach-card active"><span>02</span><h3>Prototype the useful</h3><p>Build a focused workflow quickly, with clear inputs, outputs, and a human review point.</p></div><div className="approach-card"><span>03</span><h3>Make it repeatable</h3><p>Document what works, test the edges, and help the team adopt it with confidence.</p></div></div></section>
 
-      <section className="work shell" id="work"><div className="work-heading"><div className="section-label">/ 03 — Selected work</div><h2>Building AI around<br /><em>better work.</em></h2><p>WorkflowLens is live now. Two related experiments will follow as full case studies.</p></div><div className="project-grid">{projects.map((project) => <Card key={project.number} className="project-card"><div className="project-top"><span className="project-number">{project.number}</span><span className="project-status">{project.status}</span></div><div className="project-shape" data-project={project.number}><span>✳</span></div><h3>{project.title}</h3><p>{project.description}</p><div className="tag-row">{project.tags.map((tag) => <span key={tag}>{tag}</span>)}</div><a href={project.href} className="project-link">{project.number === "01" ? "Explore live product" : "View build plan"} <span>↗</span></a></Card>)}</div></section>
+      <section className="work shell" id="work">
+        <div className="work-heading"><div className="section-label">/ 03 — Selected work</div><h2>Building AI around<br /><em>better work.</em></h2><p>One working product, built to demonstrate how I approach AI opportunity discovery, workflow design, and responsible implementation.</p></div>
+        <div className="project-grid project-grid-single">
+          <Card className="project-card project-card-featured">
+            <div className="project-top"><span className="project-number">{project.number}</span><span className="project-status">{project.status}</span></div>
+            <div className="project-feature-body">
+              <div className="project-shape" data-project={project.number}><span>✳</span></div>
+              <div className="project-feature-copy"><h3>{project.title}</h3><p>{project.description}</p><div className="tag-row">{project.tags.map((tag) => <span key={tag}>{tag}</span>)}</div><a href={project.href} className="project-link">Explore live product <span>↗</span></a></div>
+            </div>
+          </Card>
+        </div>
+      </section>
 
       <section className="experience shell"><div className="section-label">/ 04 — The foundation</div><div className="experience-layout"><h2>Data is where<br /><span>I learned to think.</span></h2><div className="timeline">{experience.map((item) => <div className="timeline-row" key={item.company}><div className="timeline-year">{item.year}</div><div><h3>{item.role}</h3><p className="company">{item.company}</p><p>{item.detail}</p></div></div>)}</div></div></section>
 
