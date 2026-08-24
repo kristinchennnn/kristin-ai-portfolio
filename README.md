@@ -2,6 +2,8 @@
 
 Personal portfolio for Kristin Chen, focused on practical AI workflows, AI enablement, and data-informed decision-making.
 
+**Live site:** [kristinzhiyingchen.com](https://kristinzhiyingchen.com)
+
 ## Stack
 
 - Next.js 16
@@ -9,6 +11,8 @@ Personal portfolio for Kristin Chen, focused on practical AI workflows, AI enabl
 - TypeScript
 - Tailwind CSS
 - shadcn-style UI primitives
+
+Production is deployed on Vercel and connected to this repository for automatic deployments from `main`. DNS is managed through Cloudflare.
 
 ## Local development
 
