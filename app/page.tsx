@@ -69,7 +69,17 @@ export default function Home() {
 
       <section className="toolkit shell"><div className="toolkit-copy"><div className="section-label">/ 05 — The toolkit</div><h2>Curious by default.<br /><em>Rigorous by choice.</em></h2></div><div className="tool-list"><div><span>AI &amp; build</span><p>Codex · AI-assisted prototyping · workflow design · research synthesis</p></div><div><span>Data &amp; analytics</span><p>Python · SQL · R · Excel · Power BI · Tableau · SAS</p></div><div><span>Languages</span><p>English · Mandarin · Cantonese · Korean</p></div></div></section>
 
-      <section className="contact shell" id="contact"><p className="eyebrow">Have a messy problem?</p><h2>Let&apos;s make it<br /><em>more useful.</em></h2><a className="button button-light" href="mailto:zchen.msc2026@ivey.ca">Start a conversation <span>↗</span></a><div className="contact-footer"><span>Kristin (Zhiying) Chen</span><span>Toronto, Canada</span><a href="https://www.linkedin.com/in/zhiying-kristin-chen" target="_blank" rel="noreferrer">LinkedIn ↗</a></div></section>
+      <section className="contact shell" id="contact">
+        <p className="eyebrow">Have a messy problem?</p>
+        <h2>Let&apos;s make it<br /><em>more useful.</em></h2>
+        <a className="button button-light" href="mailto:zchen.msc2026@ivey.ca">Start a conversation <span>↗</span></a>
+        <div className="contact-footer">
+          <span>Kristin Chen</span>
+          <span>Toronto, Canada</span>
+          <a href="mailto:zchen.msc2026@ivey.ca">zchen.msc2026@ivey.ca ↗</a>
+          <a href="https://www.linkedin.com/in/zhiying-kristin-chen/" target="_blank" rel="noreferrer">LinkedIn ↗</a>
+        </div>
+      </section>
     </main>
   );
 }
