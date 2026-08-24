@@ -1,0 +1,13 @@
+node_modules/
+.next/
+out/
+.DS_Store
+npm-debug.log*
+.vercel/
+.env*
+*.tsbuildinfo
+
+# Local source material and screenshots
+/ktristin-resume.md
+/image.png
+/image copy.png
