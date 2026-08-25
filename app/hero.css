@@ -43,9 +43,20 @@
 }
 
 .project-card-featured .project-shape {
+  position: relative;
   height: auto;
   min-height: 280px;
   margin: 26px 0 0;
+}
+
+.project-visual-image img {
+  object-fit: cover;
+  object-position: center;
+  transition: transform 500ms ease;
+}
+
+.project-card-featured:hover .project-visual-image img {
+  transform: scale(1.025);
 }
 
 .project-feature-copy {

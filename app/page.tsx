@@ -56,7 +56,14 @@ export default function Home() {
           <Card className="project-card project-card-featured">
             <div className="project-top"><span className="project-number">{project.number}</span><span className="project-status">{project.status}</span></div>
             <div className="project-feature-body">
-              <div className="project-shape" data-project={project.number}><span>✳</span></div>
+              <div className="project-shape project-visual-image">
+                <Image
+                  src="/workflowlens-portfolio.png"
+                  alt="A tangled workflow passing through a lens and becoming a structured, human-reviewed AI process"
+                  fill
+                  sizes="(max-width: 800px) calc(100vw - 80px), 45vw"
+                />
+              </div>
               <div className="project-feature-copy"><h3>{project.title}</h3><p>{project.description}</p><div className="tag-row">{project.tags.map((tag) => <span key={tag}>{tag}</span>)}</div><a href={project.href} className="project-link">Explore live product <span>↗</span></a></div>
             </div>
           </Card>
