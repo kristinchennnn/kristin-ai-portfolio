@@ -192,7 +192,9 @@ export function WorkflowAnalyzer() {
             <label>Expected adoption (%)<input type="number" min="0" max="100" value={input.expectedAdoption} onChange={(e) => update("expectedAdoption", Number(e.target.value))} /></label>
             <label>Implementation cost<input type="number" min="0" value={input.implementationCost} onChange={(e) => update("implementationCost", Number(e.target.value))} /></label>
           </div>
-          <div className="wl-security-check"><Turnstile ref={turnstileRef} siteKey={TURNSTILE_SITE_KEY || "1x00000000000000000000AA"} onToken={onToken} onExpire={onExpire} /></div>
+          {TURNSTILE_SITE_KEY
+            ? <div className="wl-security-check"><Turnstile ref={turnstileRef} siteKey={TURNSTILE_SITE_KEY} onToken={onToken} onExpire={onExpire} /></div>
+            : <div className="wl-error">Live analysis is being configured. Explore the full demo in the meantime.</div>}
         </> : null}
 
         {stage === 3 && extraction ? <>
