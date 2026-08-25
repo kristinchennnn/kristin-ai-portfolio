@@ -122,7 +122,16 @@ async function constantTimeEqual(left: string, right: string) {
 async function validateTurnstile(request: Request, env: Env, token: string) {
   const hostnames = new Set(env.TURNSTILE_HOSTNAMES.split(",").map((value) => value.trim()).filter(Boolean));
   const clientIp = request.headers.get("CF-Connecting-IP") ?? "";
-  if (!env.TURNSTILE_SECRET || !clientIp || hostnames.size === 0 || token.length > 2_048) return false;
+  if (!env.TURNSTILE_SECRET || !clientIp || hostnames.size === 0 || token.length > 2_048) {
+    console.warn(JSON.stringify({
+      message: "turnstile configuration check failed",
+      hasSecret: !!env.TURNSTILE_SECRET,
+      hasClientIp: !!clientIp,
+      hasHostnames: hostnames.size > 0,
+      tokenLengthValid: token.length <= 2_048,
+    }));
+    return false;
+  }
   try {
     const response = await fetch("https://challenges.cloudflare.com/turnstile/v0/siteverify", {
       method: "POST",
@@ -130,10 +139,29 @@ async function validateTurnstile(request: Request, env: Env, token: string) {
       signal: AbortSignal.timeout(10_000),
       body: new URLSearchParams({ secret: env.TURNSTILE_SECRET, response: token, remoteip: clientIp }),
     });
-    if (!response.ok) return false;
-    const result = z.object({ success: z.boolean(), action: z.string().optional(), hostname: z.string().optional() }).parse(await response.json());
-    return result.success && result.action === "workflowlens_analyze" && !!result.hostname && hostnames.has(result.hostname);
-  } catch { return false; }
+    if (!response.ok) {
+      console.warn(JSON.stringify({ message: "turnstile siteverify request failed", status: response.status }));
+      return false;
+    }
+    const result = z.object({
+      success: z.boolean(),
+      action: z.string().optional(),
+      hostname: z.string().optional(),
+      "error-codes": z.array(z.string()).optional(),
+    }).parse(await response.json());
+    const valid = result.success && result.action === "workflowlens_analyze" && !!result.hostname && hostnames.has(result.hostname);
+    if (!valid) console.warn(JSON.stringify({
+      message: "turnstile validation failed",
+      success: result.success,
+      action: result.action ?? null,
+      hostname: result.hostname ?? null,
+      errorCodes: result["error-codes"] ?? [],
+    }));
+    return valid;
+  } catch (error) {
+    console.warn(JSON.stringify({ message: "turnstile validation exception", error: error instanceof Error ? error.message : "unknown" }));
+    return false;
+  }
 }
 
 function aiPayload(value: unknown) {
