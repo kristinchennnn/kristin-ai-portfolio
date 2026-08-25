@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { analysisJsonSchema } from "../../lib/workflowlens-json-schema";
 import {
   analysisSchema,
   calculateRoi,
@@ -40,27 +41,6 @@ const extractionJsonSchema = {
     clarifyingQuestions: { type: "array", maxItems: 3, items: { type: "string" } },
   },
   required: ["summary", "steps", "bottlenecks", "clarifyingQuestions"],
-} as const;
-
-const analysisJsonSchema = {
-  type: "object",
-  additionalProperties: false,
-  properties: {
-    executiveSummary: { type: "string" },
-    frictionPoints: { type: "array", items: { type: "object", additionalProperties: false, properties: { title: { type: "string" }, evidence: { type: "string" }, consequence: { type: "string" } }, required: ["title", "evidence", "consequence"] } },
-    recommendations: { type: "array", items: { type: "object", additionalProperties: false, properties: {
-      stepId: { type: "string" }, category: { type: "string", enum: ["Keep Human", "AI Assist", "Automate", "Redesign First", "Do Not Use AI"] }, rationale: { type: "string" },
-      impact: { type: "integer", minimum: 1, maximum: 5 }, feasibility: { type: "integer", minimum: 1, maximum: 5 }, readiness: { type: "integer", minimum: 1, maximum: 5 }, risk: { type: "integer", minimum: 1, maximum: 5 }, changeEffort: { type: "integer", minimum: 1, maximum: 5 },
-      confidence: { type: "string", enum: ["Low", "Medium", "High"] }, humanCheckpoint: { type: "string" }, pilotAction: { type: "string" },
-    }, required: ["stepId", "category", "rationale", "impact", "feasibility", "readiness", "risk", "changeEffort", "confidence", "humanCheckpoint", "pilotAction"] } },
-    futureState: { type: "array", items: { type: "string" } },
-    humanControls: { type: "array", items: { type: "string" } },
-    risks: { type: "array", items: { type: "object", additionalProperties: false, properties: { title: { type: "string" }, mitigation: { type: "string" } }, required: ["title", "mitigation"] } },
-    roadmap: { type: "object", additionalProperties: false, properties: { thirtyDays: { type: "array", items: { type: "string" } }, sixtyDays: { type: "array", items: { type: "string" } }, ninetyDays: { type: "array", items: { type: "string" } } }, required: ["thirtyDays", "sixtyDays", "ninetyDays"] },
-    successMetrics: { type: "array", items: { type: "object", additionalProperties: false, properties: { name: { type: "string" }, measure: { type: "string" } }, required: ["name", "measure"] } },
-    limitations: { type: "array", items: { type: "string" } },
-  },
-  required: ["executiveSummary", "frictionPoints", "recommendations", "futureState", "humanControls", "risks", "roadmap", "successMetrics", "limitations"],
 } as const;
 
 function corsHeaders(request: Request, env: Env): Record<string, string> {

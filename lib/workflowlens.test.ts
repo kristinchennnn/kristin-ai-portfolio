@@ -1,4 +1,5 @@
 import { describe, expect, it } from "vitest";
+import { analysisJsonSchema } from "./workflowlens-json-schema";
 import { calculateRoi, demoReport, workflowReportSchema, type WorkflowInput } from "./workflowlens";
 
 const input: WorkflowInput = {
@@ -31,5 +32,26 @@ describe("WorkflowLens report contracts", () => {
       { name: "Expected", timeReduction: 40, monthlyHoursSaved: 14.4, annualCapacityValue: 9_504, paybackMonths: 7.6 },
       { name: "Optimistic", timeReduction: 60, monthlyHoursSaved: 21.6, annualCapacityValue: 14_256, paybackMonths: 5.1 },
     ]);
+  });
+
+  it("keeps required AI report sections populated in the model schema", () => {
+    expect(analysisJsonSchema).toMatchObject({
+      properties: {
+        frictionPoints: { minItems: 1, maxItems: 8 },
+        recommendations: { minItems: 1, maxItems: 18 },
+        futureState: { minItems: 2, maxItems: 12 },
+        humanControls: { minItems: 1, maxItems: 10 },
+        risks: { minItems: 1, maxItems: 8 },
+        roadmap: {
+          properties: {
+            thirtyDays: { minItems: 1, maxItems: 6 },
+            sixtyDays: { minItems: 1, maxItems: 6 },
+            ninetyDays: { minItems: 1, maxItems: 6 },
+          },
+        },
+        successMetrics: { minItems: 2, maxItems: 10 },
+        limitations: { minItems: 1, maxItems: 8 },
+      },
+    });
   });
 });
